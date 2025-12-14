@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Галерея рецептів</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <!-- Фільтри як радіо (можна обрати лише один) -->
+  <input type="radio" name="filter" id="filter-all" checked hidden>
+  <input type="radio" name="filter" id="filter-pyrig" hidden>
+  <input type="radio" name="filter" id="filter-rulet" hidden>
+  <input type="radio" name="filter" id="filter-sirnyky" hidden>
+  <input type="radio" name="filter" id="filter-tistechko" hidden>
+  <input type="radio" name="filter" id="filter-tort" hidden>
+
+  <main class="wrap">
+    <h1 class="logo">Тортики <span class="amp">&</span> Тістечка</h1>
+
+    <div class="filters" role="toolbar" aria-label="Фільтри">
+      <label for="filter-pyrig">Пиріг</label>
+      <label for="filter-rulet">Рулет</label>
+      <label for="filter-sirnyky">Сирники</label>
+      <label for="filter-tistechko">Тістечко</label>
+      <label for="filter-tort">Торт</label>
+      <label for="filter-all" class="reset">Скинути фільтр</label>
+
+      <div class="calorie-mock">
+        <h4>Калорії у порції</h4>
+        <input type="range" min="0" max="800" value="400" class="cal-range" aria-label="Калорії">
+        <p class="range">Від 0 до 400 кКал</p>
+      </div>
+    </div>
+
+    <input type="radio" name="slide" id="slide1" checked hidden>
+    <input type="radio" name="slide" id="slide2" hidden>
+
+    <div class="slider-controls">
+      <label for="slide2" class="arrow left show-when-slide1">◀</label>
+      <label for="slide1" class="arrow left show-when-slide2">◀</label>
+    
+      <label for="slide2" class="arrow right show-when-slide1">▶</label>
+      <label for="slide1" class="arrow right show-when-slide2">▶</label>
+    </div>
+
+    <div class="slides">
+      <div class="group group1">   
+          <div class="thumb tistechko" data-calories="265" data-kind="Тістечко">
+          <a href="#modal1"><img src="images/Знімок екрана 2025-11-18 162230.png" alt="dish1"></a>
+          <div class="info">
+              <h3>Горіхово-моркв'яний кекс</h3>
+            <p>Інгредієнти: яйця, цукор, олія, морква, борошно</p>
+          </div>
+          <div class="calories">Калорії у порції: 265 кКал</div>
+          </div>
+          <div class="thumb tort" data-calories="305" data-kind="Торт">
+          <a href="#modal2"><img src="images/Знімок екрана 2025-11-18 162247.png" alt="dish2"></a>
+          <div class="info">
+              <h3>Чізкейк шоколадний</h3>
+            <p>Ингредиенты: крем-сир, цукор, какао, шоколад</p>
+          </div>
+          <div class="calories">Калорії у порції: 305 кКал</div>
+          </div>
+          <div class="thumb tort" data-calories="450" data-kind="Торт">
+          <a href="#modal3"><img src="images/Знімок екрана 2025-11-18 162240.png" alt="dish3"></a>
+          <div class="info">
+              <h3>Торт з полуницею</h3>
+            <p>Інгредієнти: яйця, борошно, полуниця, вершки</p>
+          </div>
+          <div class="calories">Калорії у порції: 450 кКал</div>
+          </div>
+          <div class="thumb tort" data-calories="380" data-kind="Торт">
+          <a href="#modal4"><img src="images/Знімок екрана 2025-11-18 162223.png" alt="dish4"></a>
+          <div class="info">
+              <h3>Мусовий торт</h3>
+            <p>Шоколадний бісквіт та мус</p>
+          </div>
+          <div class="calories">Калорії у порції: 380 кКал</div>
+        </div>
+      </div>
+
+      <div class="group group2">
+        <div class="thumb tort" data-calories="523" data-kind="Торт">
+          <a href="#modal5"><img src="images/Знімок екрана 2025-11-18 162312.png" alt="dish5"></a>
+          <div class="info">
+            <h3>Торт з горіхами</h3>
+            <p>Інгредієнти: яйця, горіхи, цукор, крем</p>
+          </div>
+          <div class="calories">Калорії у порції: 523 кКал</div>
+        </div>
+        <div class="thumb other" data-calories="380" data-kind="Інше">
+          <a href="#modal6"><img src="images/Знімок екрана 2025-11-18 162328.png" alt="dish6"></a>
+          <div class="info">
+            <h3>Заливне</h3>
+            <p>Інгредієнти: фарш, овочі, спеції</p>
+          </div>
+          <div class="calories">Калорії у порції: 380 кКал</div>
+        </div>
+        <div class="thumb pyrig" data-calories="298" data-kind="Пиріг">
+          <a href="#modal7"><img src="images/Знімок екрана 2025-11-18 162320.png" alt="dish7"></a>
+          <div class="info">
+            <h3>Пиріг з маком</h3>
+            <p>Інгредієнти: борошно, мак, цукор</p>
+          </div>
+          <div class="calories">Калорії у порції: 298 кКал</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal1" class="modal">
+      <a class="close" href="#">×</a>
+      <div class="modal-content"><img src="images/Знімок екрана 2025-11-18 162223.png" alt="dish1 large"></div>
+    </div>
+    <div id="modal2" class="modal">
+      <a class="close" href="#">×</a>
+      <div class="modal-content"><img src="images/Знімок екрана 2025-11-18 162247.png" alt="dish2 large"></div>
+    </div>
+    <div id="modal3" class="modal">
+      <a class="close" href="#">×</a>
+      <div class="modal-content"><img src="images/Знімок екрана 2025-11-18 162240.png" alt="dish3 large"></div>
+    </div>
+    <div id="modal4" class="modal">
+      <a class="close" href="#">×</a>
+      <div class="modal-content"><img src="images/Знімок екрана 2025-11-18 162223.png" alt="dish4 large"></div>
+    </div>
+    <div id="modal5" class="modal">
+      <a class="close" href="#">×</a>
+      <div class="modal-content"><img src="images/Знімок екрана 2025-11-18 162312.png" alt="dish5 large"></div>
+    </div>
+    <div id="modal6" class="modal">
+      <a class="close" href="#">×</a>
+      <div class="modal-content"><img src="images/Знімок екрана 2025-11-18 162328.png" alt="dish6 large"></div>
+    </div>
+    <div id="modal7" class="modal">
+      <a class="close" href="#">×</a>
+      <div class="modal-content"><img src="images/Знімок екрана 2025-11-18 162320.png" alt="dish7 large"></div>
+    </div>
+    <footer class="site-footer">
+      <div class="contacts">Контакти: <a href="mailto:tortik@smakota.ua">tortik@smakota.ua</a></div>
+      <div class="copyright">© 2019 Smakota</div>
+    </footer>
+
+  </main>
+  <script src="scripts/main.js"></script>
+</body>
+</html>

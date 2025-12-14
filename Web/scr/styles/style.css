@@ -1,0 +1,189 @@
+/*Проста галерея*/
+*{box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;margin:0;color:#222;background:#fff}
+.wrap{max-width:1200px;margin:20px auto;padding:10px}
+h1{font-weight:400;color:#333}
+
+/* Логотип/заголовок */
+.logo{font-size:42px;text-align:center;margin:6px 0 12px;color:#1f3b54;font-family:'Trebuchet MS',Tahoma,Arial}
+.logo .amp{color:#e4566f;font-weight:700;margin:0 8px}
+
+/* Фільтри */
+.filters{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:10px 0 18px}
+.filters label{display:inline-flex;align-items:center;justify-content:center;background:#edf2f5;border:1px solid #d8e2ea;padding:12px;border-radius:8px;color:#27404f;font-weight:600;cursor:pointer}
+.filters label.reset{background:#f7f7f7;color:#1f3b54}
+
+.filters label:hover{background:#e6f0f6}
+.calorie-mock{margin-top:12px;padding-top:8px;border-top:1px solid #e8eaec}
+.calorie-mock h4{margin:0 0 8px;font-size:0.95rem;color:#445}
+.calorie-mock .range{margin:6px 0 0;color:#667;font-size:0.9rem}
+
+/* Стилізація повзунка (макет) */
+.cal-range{width:100%;-webkit-appearance:none;height:8px;background:#e9eef4;border-radius:6px;outline:none;margin:8px 0}
+.cal-range::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#1f3b54;box-shadow:0 2px 6px rgba(0,0,0,0.18);cursor:pointer}
+.cal-range::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#1f3b54;box-shadow:0 2px 6px rgba(0,0,0,0.18);cursor:pointer}
+
+/* Покращення карточки/модулі */
+.thumb{display:flex;flex-direction:column;width:23%;margin:0 1%;vertical-align:top;position:relative;background:#fff;border:1px solid #e6e6e6;border-radius:6px;padding:8px;box-shadow:0 1px 0 rgba(0,0,0,0.04)}
+.thumb a{display:block;overflow:hidden;border-radius:6px;height:auto}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;border:2px solid #ddd}
+.thumb .info{background:transparent;border:none;padding:8px;margin-top:10px;border-radius:4px;flex:1}
+.thumb .info h3{margin:0 0 4px;font-size:0.95rem;color:#1f3b54}
+.thumb .info p{margin:0;color:#666;font-size:0.85rem;line-height:1.4}
+.thumb .calories{border-top:1px solid #e6e6e6;padding-top:10px;margin-top:12px;color:#445; font-weight:600}
+
+
+
+.slider-controls{margin:10px 0;text-align:center;position:relative;min-height:200px}
+.arrow{display:inline-block;background:#e9eef4;color:#1f3b54;padding:8px 12px;border-radius:6px;margin:0 8px;cursor:pointer;border:2px solid #cbddef;text-decoration:none;position:absolute;top:50%;transform:translateY(-50%)}
+.arrow.left{left:0}
+.arrow.right{right:0}
+
+/*приховувати елементи керування*/
+.show-when-slide1, .show-when-slide2 { display: none; }
+#slide1:checked ~ .slider-controls .show-when-slide1 { display: inline-block; }
+#slide1:checked ~ .slider-controls .show-when-slide2 { display: none; }
+#slide2:checked ~ .slider-controls .show-when-slide2 { display: inline-block; }
+#slide2:checked ~ .slider-controls .show-when-slide1 { display: none; }
+
+.slides { position: relative; padding: 0 60px; min-height: 280px; }
+.group { transition: opacity .45s ease; opacity: 0; visibility: hidden; display: none; text-align: center; }
+.group.group1 { opacity: 1; visibility: visible; display: block; }
+/*приховувати групи за допомогою непрозорості і display*/
+#slide1:checked ~ .slides .group1 { display:block; opacity:1; visibility:visible; }
+#slide1:checked ~ .slides .group2 { display:none; opacity:0; visibility:hidden; }
+#slide2:checked ~ .slides .group2 { display:block; opacity:1; visibility:visible; }
+#slide2:checked ~ .slides .group1 { display:none; opacity:0; visibility:hidden; }
+
+/*макет ескізів за допомогою inline-block*/
+.thumb{display:inline-block;width:23%;margin:0 1%;vertical-align:top;position:relative}
+.thumb a{display:block;position:relative;height:140px}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;border-radius:6px;border:2px solid #ddd;box-shadow:0 2px 6px rgba(0,0,0,.06);transition:all .18s ease}
+.thumb a:hover img{border-color:#1f3b54;box-shadow:0 6px 14px rgba(31,59,84,.14);transform:scale(1.02)}
+
+/*картка з інформацією про рецепт*/
+.thumb .info{background:#fafafa;border:1px solid #e0e0e0;padding:10px;margin-top:8px;border-radius:4px;opacity:0;visibility:hidden;transition:opacity .25s ease, visibility .25s ease}
+.thumb:hover .info{opacity:1;visibility:visible}
+.thumb .info h3{margin:0 0 4px;font-size:0.95rem;color:#1f3b54}
+.thumb .info p{margin:0;color:#666;font-size:0.85rem;line-height:1.4}
+
+/*модальне накладання з використанням :target*/
+.modal{position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;padding:40px}
+.modal:target{display:block}
+.modal .modal-content{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:80%;max-height:80%;background:#fff;padding:10px}
+.modal img{max-width:100%;max-height:80vh;display:block}
+.modal .close{position:fixed;right:20px;top:18px;color:#fff;font-size:40px;text-decoration:none}
+.modal .close:hover{color:#eee}
+
+/*переконайтеся, що групові блоки не перетікають у стовпці*/
+.group{break-inside:avoid;}
+
+/*адаптивне налаштування*/
+@supports (column-width: 300px){
+  /*збередення поведінки стовпця*/
+}
+
+/*приховати радіовходи*/
+input[type="radio"]{display:none}
+
+/* Підпис/футер */
+.site-footer{margin-top:18px;padding:12px;border-top:1px solid #e6e6e6;color:#445;display:flex;justify-content:space-between;align-items:center;font-size:0.95rem}
+.site-footer a{color:#1f4b63;text-decoration:none}
+.site-footer a:hover{text-decoration:underline}
+
+/* =========================
+   Адаптивні стилі (макети)
+   - Мобільні: 375px — 730px
+   - Планшети: 730px — 1200px
+   - Десктоп: від 1200px
+   ========================= */
+
+/* Мобільні: 375px — 730px */
+@media (min-width:375px) and (max-width:730px) {
+  .wrap{max-width:420px;margin:8px auto;padding:12px}
+  h1{font-size:34px;text-align:center;margin:6px 0 12px;color:#26435a}
+
+  /* Прибираємо стрілки, керування робиться натисканням по картках */
+  .arrow{display:none}
+
+  /* групи стають потоком (не абсолютні) */
+  .slides{padding:0;min-height:0}
+  .group{position:static;left:auto;right:auto;width:100%;opacity:1;visibility:visible;text-align:left}
+
+  /* кожна картка — повна ширина зі збільшеним зображенням */
+  .thumb{display:block;width:100%;margin:0 0 12px;}
+  .thumb a{height:140px}
+  .thumb img{height:100%;border-radius:10px;border:2px solid #e6e6e6}
+
+  /* Інформація видима завжди під карткою */
+  .thumb .info{opacity:1;visibility:visible;padding:12px;border-radius:10px;margin-top:10px;background:#fff;border:1px solid #e7e7e7}
+  .thumb .info h3{font-size:1.05rem;color:#1f3b54;margin-bottom:6px}
+  .thumb .info p{font-size:0.92rem;color:#444;line-height:1.5}
+
+  /* Модальне вікно трохи інше на мобайлі */
+  .modal .modal-content{max-width:96%;max-height:86%;padding:8px}
+  .modal .close{right:8px;top:8px;font-size:32px}
+  .site-footer{flex-direction:column;text-align:center;gap:6px}
+}
+
+/* Планшети: 730px — 1200px */
+@media (min-width:730px) and (max-width:1200px) {
+  .wrap{max-width:900px;padding:12px}
+  h1{font-size:40px;text-align:center}
+  .slides{padding:0 40px}
+  .group{position:relative;left:auto;right:auto;top:auto;width:100%;opacity:1;visibility:visible}
+  .thumb{display:inline-block;width:48%;margin:0 1% 12px;min-height:220px}
+  .thumb a{height:120px}
+  .thumb img{height:100%;border-radius:8px}
+  .thumb .info{opacity:1;visibility:visible}
+}
+
+/* Десктоп: від 1200px */
+@media (min-width:1200px) {
+  .wrap{max-width:1200px;display:grid;grid-template-columns:1fr 260px;grid-template-rows:auto 1fr;grid-gap:20px;grid-template-areas:"header header" "main sidebar"}
+  .logo{grid-area:header}
+  .slides{grid-area:main;padding:0 20px}
+  .filters{grid-area:sidebar;margin:0;padding:18px 12px;background:#fafafa;border:1px solid #e7e9ec;border-radius:6px}
+  h1{font-size:46px;text-align:center}
+
+  /* група як сітка карток в 3 колонки */
+  .group{position:static;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;}
+
+  /* компактні карточки: рівна висота, фото однакового розміру, фото вирівнюється по верху */
+  .thumb{width:100%;min-height:220px}
+  .thumb a{height:120px}
+  .thumb img{object-position:top center}
+
+  /* Desktop card: image left, text right, calories row at bottom */
+  .thumb{display:flex;flex-direction:row;align-items:flex-start;gap:14px;padding:12px}
+  .thumb a{width:110px;height:90px;flex:0 0 110px;border-radius:6px;overflow:hidden}
+  .thumb img{width:110px;height:90px;object-fit:cover;border-radius:6px;border:1px solid #e6e6e6}
+  .thumb .info{padding:0;margin:0;flex:1;background:transparent;border:none;opacity:1;visibility:visible}
+  .thumb .info h3{margin:0 0 6px;font-size:1rem;color:#1f3b54;font-weight:700}
+  .thumb .info h3::before{content: attr(data-kind) ": ";font-weight:600;color:#253845}
+  .thumb .info p{margin:0;color:#556;font-size:0.9rem}
+  .thumb .calories{border-top:1px solid #e6e6e6;padding-top:12px;margin-top:12px;color:#445;font-weight:700;background:transparent}
+
+  .arrow{display:inline-block}
+  /* у сайдбарі фільтри — стовпчик */
+  .filters{display:flex;flex-direction:column;gap:12px}
+  .filters label{display:block;width:100%;text-align:center}
+}
+
+/* Фільтрація: при виборі виду інші картки приховуються */
+#filter-pyrig:checked ~ .wrap .thumb:not(.pyrig),
+#filter-rulet:checked ~ .wrap .thumb:not(.rulet),
+#filter-sirnyky:checked ~ .wrap .thumb:not(.sirnyky),
+#filter-tistechko:checked ~ .wrap .thumb:not(.tistechko),
+#filter-tort:checked ~ .wrap .thumb:not(.tort) {
+  display:none;
+}
+
+/* Підсвітка активної мітки фільтра */
+#filter-pyrig:checked ~ .wrap .filters label[for="filter-pyrig"],
+#filter-rulet:checked ~ .wrap .filters label[for="filter-rulet"],
+#filter-sirnyky:checked ~ .wrap .filters label[for="filter-sirnyky"],
+#filter-tistechko:checked ~ .wrap .filters label[for="filter-tistechko"],
+#filter-tort:checked ~ .wrap .filters label[for="filter-tort"]{
+  background:#e6f0f6;border-color:#c9dce6;box-shadow:inset 0 -2px rgba(0,0,0,0.03)
+}
