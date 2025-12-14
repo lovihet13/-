@@ -7,13 +7,16 @@
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <!-- Фільтри як радіо (можна обрати лише один) -->
   <input type="radio" name="filter" id="filter-all" checked hidden>
   <input type="radio" name="filter" id="filter-pyrig" hidden>
   <input type="radio" name="filter" id="filter-rulet" hidden>
   <input type="radio" name="filter" id="filter-sirnyky" hidden>
   <input type="radio" name="filter" id="filter-tistechko" hidden>
   <input type="radio" name="filter" id="filter-tort" hidden>
+  <input type="radio" name="cal" id="cal-all" checked hidden>
+  <input type="radio" name="cal" id="cal-0-300" hidden>
+  <input type="radio" name="cal" id="cal-301-400" hidden>
+  <input type="radio" name="cal" id="cal-401-800" hidden>
 
   <main class="wrap">
     <h1 class="logo">Тортики <span class="amp">&</span> Тістечка</h1>
@@ -28,8 +31,12 @@
 
       <div class="calorie-mock">
         <h4>Калорії у порції</h4>
-        <input type="range" min="0" max="800" value="400" class="cal-range" aria-label="Калорії">
-        <p class="range">Від 0 до 400 кКал</p>
+        <div class="cal-labels">
+          <label for="cal-0-300">0–300 кКал</label>
+          <label for="cal-301-400">301–400 кКал</label>
+          <label for="cal-401-800">401–800 кКал</label>
+          <label for="cal-all" class="reset">Усі</label>
+        </div>
       </div>
     </div>
 
@@ -46,7 +53,7 @@
 
     <div class="slides">
       <div class="group group1">   
-          <div class="thumb tistechko" data-calories="265" data-kind="Тістечко">
+          <div class="thumb tistechko cal-0-300" data-calories="265" data-kind="Тістечко">
           <a href="#modal1"><img src="images/Знімок екрана 2025-11-18 162230.png" alt="dish1"></a>
           <div class="info">
               <h3>Горіхово-моркв'яний кекс</h3>
@@ -54,7 +61,7 @@
           </div>
           <div class="calories">Калорії у порції: 265 кКал</div>
           </div>
-          <div class="thumb tort" data-calories="305" data-kind="Торт">
+          <div class="thumb tort cal-301-400" data-calories="305" data-kind="Торт">
           <a href="#modal2"><img src="images/Знімок екрана 2025-11-18 162247.png" alt="dish2"></a>
           <div class="info">
               <h3>Чізкейк шоколадний</h3>
@@ -62,7 +69,7 @@
           </div>
           <div class="calories">Калорії у порції: 305 кКал</div>
           </div>
-          <div class="thumb tort" data-calories="450" data-kind="Торт">
+          <div class="thumb tort cal-401-800" data-calories="450" data-kind="Торт">
           <a href="#modal3"><img src="images/Знімок екрана 2025-11-18 162240.png" alt="dish3"></a>
           <div class="info">
               <h3>Торт з полуницею</h3>
@@ -70,7 +77,7 @@
           </div>
           <div class="calories">Калорії у порції: 450 кКал</div>
           </div>
-          <div class="thumb tort" data-calories="380" data-kind="Торт">
+          <div class="thumb tort cal-301-400" data-calories="380" data-kind="Торт">
           <a href="#modal4"><img src="images/Знімок екрана 2025-11-18 162223.png" alt="dish4"></a>
           <div class="info">
               <h3>Мусовий торт</h3>
@@ -81,7 +88,7 @@
       </div>
 
       <div class="group group2">
-        <div class="thumb tort" data-calories="523" data-kind="Торт">
+        <div class="thumb tort cal-401-800" data-calories="523" data-kind="Торт">
           <a href="#modal5"><img src="images/Знімок екрана 2025-11-18 162312.png" alt="dish5"></a>
           <div class="info">
             <h3>Торт з горіхами</h3>
@@ -89,7 +96,7 @@
           </div>
           <div class="calories">Калорії у порції: 523 кКал</div>
         </div>
-        <div class="thumb other" data-calories="380" data-kind="Інше">
+        <div class="thumb other cal-301-400" data-calories="380" data-kind="Інше">
           <a href="#modal6"><img src="images/Знімок екрана 2025-11-18 162328.png" alt="dish6"></a>
           <div class="info">
             <h3>Заливне</h3>
@@ -97,7 +104,7 @@
           </div>
           <div class="calories">Калорії у порції: 380 кКал</div>
         </div>
-        <div class="thumb pyrig" data-calories="298" data-kind="Пиріг">
+        <div class="thumb pyrig cal-0-300" data-calories="298" data-kind="Пиріг">
           <a href="#modal7"><img src="images/Знімок екрана 2025-11-18 162320.png" alt="dish7"></a>
           <div class="info">
             <h3>Пиріг з маком</h3>
@@ -142,6 +149,5 @@
     </footer>
 
   </main>
-  <script src="scripts/main.js"></script>
 </body>
 </html>
